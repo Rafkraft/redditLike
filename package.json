@@ -1,0 +1,9 @@
+{
+  "name": "nyves",
+  "description": "modules",
+  "author": "Charles",
+  "dependencies": {
+    "express": "^4.9.0",
+    "ejs": "^1.0.0"
+  }
+}
