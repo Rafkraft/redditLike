@@ -1,0 +1,24 @@
+extends ../layouts/base
+ 
+block content
+    #register.form
+        h2 Register
+        #error
+            if problem
+                p #{problem}
+        form(method="post" action="", novalidate).auth-form
+            input(type='hidden', name=csrf_token_key, value=csrf_token_value)
+            div.form-group
+                label(for='email') Email
+                input(type='email', name='email', id='email').form-control
+            div.form-group
+                label(for='username') Username
+                input(type='username', name='username', id='username').form-control
+            div.form-group
+                label(for='password') Password
+                input(type='password', name='password', id='password').form-control
+            div.form-group
+                label(for='password') Password verification
+                input(type='password', name='passwordSecond', id='password').form-control
+            div.form-group
+                button(type='submit').btn.btn-primary Sign In

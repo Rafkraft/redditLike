@@ -1,0 +1,42 @@
+.form {
+    max-width: 500px;
+    width:90%;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+    margin:40px auto;
+}
+.form form,#login h2,#login #error{
+    text-align: left;
+}
+.form form .form-group,#login h2,#login #error{
+    margin: 15px;
+    margin-left: 8vw;
+}
+.form form .form-group label {
+    width: 190px;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+.form form .form-group input {
+    padding:8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border:1px solid #CCC;
+    outline:none;
+}
+.form form .form-group input:focus {
+    outline:#07C solid 1px;
+}
+.form #error {
+    margin-left: 8vw;
+    text-align: left;
+}
+.form #error p {
+    display: inline-block;
+    background-color: #C45;
+    color:#FFF;
+    padding:7px;
+    border-radius: 3px;
+    font-size: 14px;
+}

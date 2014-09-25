@@ -1,0 +1,46 @@
+include ../mixins/flash-messages
+ 
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width")
+        
+        title= title || 'My Keystone Website'
+        link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+        link(href="/styles/site.min.css", rel="stylesheet")
+        link(href="/css/main.css", rel="stylesheet")
+        link(href="/css/infos.css", rel="stylesheet")
+        link(href="/css/login.css", rel="stylesheet")
+
+        
+        block css
+        block head
+    body
+        
+        
+        
+        #all
+            div#infosPlaceholder
+                if connected==true
+                    h5 #{userEmail}
+                    a(href="keystone/signout", class="logout") Log out
+
+                else
+                    h5 #{connected}
+                    a(href="login", class="login") Log in
+                    a(href="register", class="register") sign up
+            #header My Keystone Website
+            #content
+                
+                block intro
+                
+                +flash-messages(messages)
+                
+                block content
+            
+            #footer Powered by <a href='http://keystonejs.com', target='_blank'>KeystoneJS</a>.
+        
+    script(src='/js/lib/jquery/jquery-1.10.2.min.js')
+    
+    block js

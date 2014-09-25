@@ -1,0 +1,19 @@
+#infosPlaceholder {
+    text-align: right;
+    position: relative;
+}
+#infosPlaceholder h5,#infosPlaceholder a {
+    display: inline-block;
+    margin-right:40px;
+}
+#infosPlaceholder a {
+    font-size: 14px;
+    text-decoration: none;
+}
+#infosPlaceholder .logout {
+    color:#C45;
+}
+#infosPlaceholder .logout:hover {
+    text-decoration: underline;
+    line-height: 14px;
+}
