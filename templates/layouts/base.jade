@@ -11,8 +11,6 @@ html
         link(href="/styles/site.min.css", rel="stylesheet")
         link(href="/css/main.css", rel="stylesheet")
         link(href="/css/infos.css", rel="stylesheet")
-        link(href="/css/login.css", rel="stylesheet")
-
         
         block css
         block head
@@ -25,9 +23,9 @@ html
                 if connected==true
                     h5 #{userEmail}
                     a(href="keystone/signout", class="logout") Log out
+                    a(href="account", class="login") Account
 
                 else
-                    h5 #{connected}
                     a(href="login", class="login") Log in
                     a(href="register", class="register") sign up
             #header My Keystone Website
@@ -39,7 +37,7 @@ html
                 
                 block content
             
-            #footer Powered by <a href='http://keystonejs.com', target='_blank'>KeystoneJS</a>.
+            #footer 
         
     script(src='/js/lib/jquery/jquery-1.10.2.min.js')
     

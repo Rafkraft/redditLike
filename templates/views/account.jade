@@ -1,0 +1,43 @@
+extends ../layouts/base
+ 
+block content
+    link(href="/css/forms.css", rel="stylesheet")
+
+    #account.form
+        h2 Account
+        if typeof info !== "undefined"
+            .info.message
+                h5 #{info}
+        if typeof error !== "undefined"
+            .error.message
+                h5 #{error}
+        form(method="post" action="", novalidate).auth-form
+            input(type='hidden', name=csrf_token_key, value=csrf_token_value)
+
+            h4 #{userEmail}
+            h4 #{userName}
+            hr
+            h4
+                u Change your username
+            div.form-group
+                label(for='username') New username
+                input(type='username', name='username').form-control
+            div.form-group
+                label(for='username') New username (again)
+                input(type='username', name='usernameConfirmation').form-control
+
+            //hr
+            //h4 
+            //    u Change your password
+            //div.form-group
+            //    label(for='password') Actual password
+            //    input(type='password', name='actualPassword').form-control
+            //div.form-group
+            //    label(for='password') New password
+            //    input(type='password', name='password').form-control
+            //div.form-group
+            //    label(for='password') New password (again)
+            //    input(type='password', name='passwordSecond').form-control
+            div.form-group
+                button(type='submit').btn.btn-primary Sign In
+

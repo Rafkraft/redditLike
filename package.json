@@ -4,10 +4,16 @@
   "private": true,
   "dependencies": {
     "keystone": "latest",
-    "underscore": "latest",
+    "underscore": "^1.7.0",
     "ejs": "^1.0.0",
     "ejs-locals": "^1.0.2",
-    "validator": "^3.19.0"
+    "validator": "^3.19.0",
+    "flash": "^1.1.0",
+    "mongoose": "^3.8.16",
+    "async": "^0.9.0",
+    "node-async": "0.0.1",
+    "grunt": "^0.4.5",
+    "grunt-sass": "^0.14.2"
   },
   "engines": {
     "node": "0.10.x",

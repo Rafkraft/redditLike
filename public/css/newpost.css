@@ -1,0 +1,58 @@
+#newpostForm {
+    max-width: 500px;
+    width:90%;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+    margin:40px;
+}
+#newpostForm>div {
+    text-align:left;
+    padding-left: 3vw;
+}
+
+#formTypes {
+    padding:0px;
+}
+#formTypes li {
+    display: inline-block;
+}
+#formTypes li a {
+    color:#FFF;
+    background-color: #5f69d8;
+    text-decoration: none;
+    padding:2px 7px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+#formTypes li .active {
+    background-color: #7dabd8;
+    cursor: default;
+}
+#newpostForm .form-group {
+    padding:10px;
+    padding-left: 0px;
+}
+#newpostForm .form-group label{
+    display: block;
+}
+#newpostForm .form-group textarea {
+    width: 90%;
+    height: 100px;
+    max-width: 90%;
+    max-height: 200px;
+    overflow: auto;
+    outline: none;
+}
+#newpostForm .form-group #title,#newpostForm .form-group #link{
+    width: 90%;
+    max-width: 90%;
+    height:20px;
+    max-height: 40px;
+}
+#newpostForm .form-group textarea:focus {
+    border: 1px solid #5f69d8;
+}
+#newpostForm .button:hover {
+    cursor: pointer;
+    background-color:#7495d8; 
+}

@@ -1,6 +1,5 @@
 var keystone = require('keystone');
 
-
 keystone.init({
     'name': 'Super !',
 
@@ -21,8 +20,6 @@ keystone.init({
 });
  
 require('./models');
-
-
 
 keystone.set('routes', require('./routes'));
  

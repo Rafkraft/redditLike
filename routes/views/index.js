@@ -8,10 +8,5 @@ exports = module.exports = function(req, res) {
 
     var view = new keystone.View(req, res);
 
-    var sessionVars = index.sessionInfos(req,res);
-    console.log(sessionVars[0]);
-    view.render('index',{
-        connected:sessionVars[0],
-        userEmail:sessionVars[1]
-    });    
+    view.render('/',index.sessionInfos(req,res));
 }

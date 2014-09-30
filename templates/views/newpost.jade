@@ -1,0 +1,60 @@
+extends ../layouts/base
+ 
+block content
+    link(href="/css/newpost.css", rel="stylesheet")
+    script(type='text/javascript' src="/js/libs/jquery-2.1.1.min.js")
+    script(type='text/javascript' src="/js/libs/underscore.js")
+    script(type='text/javascript' src="/js/libs/backbone-1.1.2.js")
+    script(type='text/javascript' src="/js/libs/marionette.min-2.1.0.js")
+    script(type='text/javascript' src="/js/newpost.js")
+
+    h2 New Post
+
+    if typeof info !== "undefined"
+        .info.message
+            h5 #{info}
+    if typeof error !== "undefined"
+        .error.message
+            h5 #{error}
+
+    #newpostForm
+
+    script(type="text/template" id="textFormTemplate")
+        ul#formTypes
+            li 
+                a(href="#link") Link
+            li 
+                a.active(href="#text") Text
+
+        h4 Submit a text post
+
+        form(method="post" action="", novalidate).auth-form
+            input(type='hidden', name='type',value="text")
+            div.form-group
+                label(for='title') Title
+                textarea(type='string', name='title',id="title").form-control
+            div.form-group
+                label(for='Text') Text
+                textarea(type='string', name='text', id="text").form-control
+            div.form-group
+                button.button(type='submit').btn.btn-primary Send
+
+    script(type="text/template" id="linkFormTemplate")
+        ul#formTypes
+            li 
+                a.active(href="#link") Link
+            li 
+                a(href="#text") Text
+
+        h4 Submit a link post
+
+        form(method="post" action="", novalidate).auth-form
+            input(type='hidden', name='type',value="link")
+            div.form-group
+                label(for='title') Title
+                textarea(type='string', name='title',id="title").form-control
+            div.form-group
+                label(for='title') Link
+                textarea(type='string', name='link',id="link").form-control
+            div.form-group
+                button.button(type='submit').btn.btn-primary Send

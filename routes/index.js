@@ -1,6 +1,8 @@
 var keystone = require('keystone'),
     middleware = require('./middleware'),
     importRoutes = keystone.importer(__dirname);
+
+var flash = require('flash');
  
 
 // Common Middleware
@@ -37,14 +39,22 @@ exports.sessionInfos = function(req,res){
     if (typeof res.locals.user=="undefined"){
         connected= false;
         userEmail= null;
+        userName=null;
     }
     else {
         connected= true;
         userEmail= res.locals.user.email;
+        userName=res.locals.user.userName;
     }
-    var tab = [connected,userEmail];
 
-    return tab;
+    var toReturn = {
+        error:req.flash('error')[0] ,
+        info:req.flash('info')[0] ,
+        connected:connected,
+        userEmail:userEmail,
+        userName:userName
+    };
+    return toReturn;
 }
 
 
@@ -56,4 +66,8 @@ exports = module.exports = function(app) {
     app.get('/logout', routes.views.logout);
     app.get('/register', routes.views.register);
     app.post('/register', routes.views.register);
+    app.get('/account', routes.views.account);
+    app.post('/account', routes.views.account);
+    app.get('/r/:sub',routes.views.subreddit);
 }
+

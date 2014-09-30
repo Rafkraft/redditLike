@@ -1,18 +1,44 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
-
 body {
-    background-color: #FFF;
-    width:100%;
-    height: 100%;
-    position: relative;
-    font-family: 'Open Sans', sans-serif;
-}
-
-body >div {
+  background-color: #FFF;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: 'Open Sans', sans-serif; }
+  body > div {
     max-width: 1200px;
-    width:90%;
+    width: 90%;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
-    border: 1px solid #000;
-}
+    border: 1px solid #000; }
+
+.button {
+  padding: 8px;
+  font-size: 0.8em;
+  text-decoration: none;
+  margin: 0;
+  display: inline-block;
+  background-color: #5f69d8;
+  border: none;
+  color: #FFF;
+  border-radius: 4px; }
+
+.message {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px; }
+  .message h5 {
+    display: inline-block;
+    margin: 0;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 13px; }
+  .message .error h5 {
+    background-color: #C45;
+    color: #FFF; }
+  .message .info h5 {
+    background-color: #40c13b;
+    color: #FFF; }
+
+/*# sourceMappingURL=main.css.map */

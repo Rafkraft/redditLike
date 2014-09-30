@@ -1,0 +1,22 @@
+extends ../layouts/base
+ 
+block content
+    link(href="/css/forms.css", rel="stylesheet")
+    
+    h2 Subreddit  
+    if typeof info !== "undefined"
+        .info.message
+            h5 #{info}
+    if typeof error !== "undefined"
+        .error.message
+            h5 #{error}
+
+    ul
+        each val in posts
+            if val.type =="link"
+                li
+                    a(href="#{val.link}") #{val.title}
+            if val.type =="text"
+                li
+                    p #{val.title}
+
