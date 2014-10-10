@@ -1,38 +1,38 @@
 extends ../layouts/base
  
 block content
-    link(href="/css/newpost.css", rel="stylesheet")
-    script(type='text/javascript' src="/js/libs/jquery-2.1.1.min.js")
-    script(type='text/javascript' src="/js/libs/underscore.js")
-    script(type='text/javascript' src="/js/libs/backbone-1.1.2.js")
-    script(type='text/javascript' src="/js/libs/marionette.min-2.1.0.js")
+    link(href="/css/newPost.css", rel="stylesheet")
     script(type='text/javascript' src="/js/newpost.js")
 
-    h2 New Post
+    h2 #{subReddit} - New Post
 
-    if typeof info !== "undefined"
-        .info.message
-            h5 #{info}
-    if typeof error !== "undefined"
-        .error.message
-            h5 #{error}
+    div.message
+        if typeof info !== "undefined"
+            .info
+                h5 #{info}
+        if typeof error !== "undefined"
+            .error
+                h5 #{error}
 
-    #newpostForm
+    ul#formTypes
+        li 
+            a.link Link
+        li.active
+            a.text Text
+
+    p.rules Merci de poster un lien ou contenu en adéquation avec la section concernée, tout propos racistes entraine un kick ou un ban.      
+
+    div#main
 
     script(type="text/template" id="textFormTemplate")
-        ul#formTypes
-            li 
-                a(href="#link") Link
-            li 
-                a.active(href="#text") Text
-
         h4 Submit a text post
-
         form(method="post" action="", novalidate).auth-form
-            input(type='hidden', name='type',value="text")
+            input(type='hidden', name='type',value="post")
+            input(type='hidden', name='postType',value="text")
+            input(type='hidden', name='subReddit', value="#{subReddit}")
             div.form-group
                 label(for='title') Title
-                textarea(type='string', name='title',id="title").form-control
+                input(type='string', name='title',id="title").form-control
             div.form-group
                 label(for='Text') Text
                 textarea(type='string', name='text', id="text").form-control
@@ -40,21 +40,17 @@ block content
                 button.button(type='submit').btn.btn-primary Send
 
     script(type="text/template" id="linkFormTemplate")
-        ul#formTypes
-            li 
-                a.active(href="#link") Link
-            li 
-                a(href="#text") Text
-
         h4 Submit a link post
-
         form(method="post" action="", novalidate).auth-form
-            input(type='hidden', name='type',value="link")
+            input(type='hidden', name='type',value="post")
+            input(type='hidden', name='postType',value="link")
+            input(type='hidden', name='subReddit', value="#{subReddit}")
             div.form-group
                 label(for='title') Title
-                textarea(type='string', name='title',id="title").form-control
+                input(type='string', name='title',id="title").form-control
             div.form-group
                 label(for='title') Link
-                textarea(type='string', name='link',id="link").form-control
+                input(type='string', name='link',id="link").form-control
             div.form-group
                 button.button(type='submit').btn.btn-primary Send
+

@@ -13,7 +13,8 @@
     "async": "^0.9.0",
     "node-async": "0.0.1",
     "grunt": "^0.4.5",
-    "grunt-sass": "^0.14.2"
+    "grunt-sass": "^0.14.2",
+    "unidecode": "^0.1.3"
   },
   "engines": {
     "node": "0.10.x",

@@ -11,12 +11,23 @@ html
         link(href="/styles/site.min.css", rel="stylesheet")
         link(href="/css/main.css", rel="stylesheet")
         link(href="/css/infos.css", rel="stylesheet")
+        link(href="/css/fontello/css/fontello.css", rel="stylesheet")
+
+        script(type='text/javascript' src="/js/libs/jquery-2.1.1.min.js")
+        script(type='text/javascript' src="/js/libs/underscore.js")
+        script(type='text/javascript' src="/js/libs/backbone-1.1.2.js")
+        script(type='text/javascript' src="/js/libs/marionette.min-2.1.0.js")
+
         
         block css
         block head
+
+        script.
+            window.userInfos=[];                                          
+            window.userInfos.connected ="#{connected}";
+            window.userInfos.userEmail ="#{userEmail}";
+            window.userInfos.userName ="#{userName}";
     body
-        
-        
         
         #all
             div#infosPlaceholder
@@ -38,7 +49,5 @@ html
                 block content
             
             #footer 
-        
-    script(src='/js/lib/jquery/jquery-1.10.2.min.js')
-    
+            
     block js

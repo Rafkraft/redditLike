@@ -1,0 +1,107 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600italic,600,400italic);
+
+$main-blue: #5f69d8;
+$dark-blue: #363c7b;
+$clear-blue: #acdef3;
+$background-li:#95c2f4;
+$red-troll:#be1118;
+$swagg-green:#288b1b;
+$padding-left:40px;
+
+.message {
+    padding-left:$padding-left;
+}
+#main {
+    padding-left:$padding-left;
+}
+.rules {
+    background-color: $clear-blue;
+    border: 1px solid $main-blue;
+    border-radius: 3px;
+    text-align: left;
+    width: 90%;
+    max-width: 400px;
+    margin-left: $padding-left;
+    padding:10px;
+}
+#formTypes {
+    padding-left:$padding-left;
+    display: block;
+    text-align: left;
+    li {
+        background-color: #555;
+        display: inline-block;
+        border-radius: 3px;
+        padding:5px;
+        cursor: pointer;
+        a{
+            cursor: pointer;
+            color:#FFF;
+            padding:10px 9px;
+            text-decoration: none;
+            font-weight: 300;
+        }
+    }
+    li.active {
+        background-color: #DDD;
+        cursor: default;
+        a {
+            color:#111;
+            cursor: default;
+        }
+    }
+    li.newpost{
+        background-color:$main-blue;
+    }
+    
+}
+#form {
+    padding-left: $padding-left;
+    display: inline;
+    h4 {
+        text-align: left;
+        color:#000000;
+        font-size: 24px;
+    }
+    form {
+        text-align: left;
+        .form-group {
+            padding:10px 0px;
+            label{
+                display: block;
+                padding-bottom:10px; 
+                font-size: 18px;
+            }
+            textarea{
+                padding:5px;
+                border-radius: 4px;
+                outline: none;
+                border: 1px solid #888;
+                width: 400px;
+                max-width: 600px;
+                height:100px;
+                max-height: 300px;
+                &:focus{
+                    border:1px solid $main-blue;
+                }
+            }
+            input {
+                outline: none;
+                border: 1px solid #888;
+                padding:5px;
+                width:90%;
+                max-width: 400px;
+                &:focus{
+                    border:1px solid $main-blue;
+                }
+            }
+            .button {
+                padding:10px 16px;
+                background-color: $swagg-green;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        }
+
+    }
+}

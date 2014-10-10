@@ -1,0 +1,63 @@
+extends ../layouts/base
+ 
+block content
+    link(href="/css/fontello/css/fontello.css", rel="stylesheet")
+    link(href="/css/post.css", rel="stylesheet")
+    script(type='text/javascript' src="/js/post.js")
+    
+    h2 #{completeName} 
+
+    script.                                              
+        window.subReddit ="#{subReddit}";
+        window.postUrlTitle ="#{postUrlTitle}";
+
+    div#nav
+        ul
+            li.newpost
+                a(href="./") /r/#{subReddit}
+
+    div#main
+        div.message
+            if typeof info !== "undefined"
+                .info
+                    h5 #{info}
+            if typeof error !== "undefined"
+                .error
+                    h5 #{error}
+        div#post
+        div#commentsArea
+            div#form
+                if connected==true                
+                    form(method="post" action="", novalidate).auth-form
+                        input(type='hidden', name='type',value="comment")
+                        input(type='hidden', name='subReddit', value="#{subReddit}")
+                        input(type='hidden', name='postUrlTitle', value="#{postUrlTitle}")
+                        div.form-group
+                            label(for='Text') Comment
+                            textarea(type='string', name='text', id="text").form-control
+                        div.form-group
+                            button.button(type='submit').btn.btn-primary Send
+                else
+                    div.notConnected 
+                        i.icon-block
+                        span you must be connected to comment
+            div#comments
+
+
+    script(type="text/template" id="postTemplate")
+        h2 <%=title%>
+        h5.date <%=date%>
+        p.content <%=content%>
+        h5.commentsNumber <%=commentsNumber%>
+
+    script(type="text/template" id="commentTemplate")
+        h5.author <%=author%>
+        h5.date <%=date%>
+        p.content <%=content%>
+            i.upVotesNumber <%=upVotesNumber%>
+            i.icon-up-open
+
+
+
+
+

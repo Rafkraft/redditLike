@@ -8,7 +8,10 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'public/css/main.css': 'public/css/main.scss'
+                    'public/css/main.css': 'public/css/main.scss',
+                    'public/css/subReddit.css': 'public/css/subReddit.scss',
+                    'public/css/newPost.css': 'public/css/newPost.scss',
+                    'public/css/post.css': 'public/css/post.scss'
                 }
             }
         }

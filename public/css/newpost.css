@@ -1,58 +1,83 @@
-#newpostForm {
-    max-width: 500px;
-    width:90%;
-    border: 1px solid #DDD;
-    border-radius: 6px;
-    margin:40px;
-}
-#newpostForm>div {
-    text-align:left;
-    padding-left: 3vw;
-}
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600italic,600,400italic);
+.message {
+  padding-left: 40px; }
+
+#main {
+  padding-left: 40px; }
+
+.rules {
+  background-color: #acdef3;
+  border: 1px solid #5f69d8;
+  border-radius: 3px;
+  text-align: left;
+  width: 90%;
+  max-width: 400px;
+  margin-left: 40px;
+  padding: 10px; }
 
 #formTypes {
-    padding:0px;
-}
-#formTypes li {
+  padding-left: 40px;
+  display: block;
+  text-align: left; }
+  #formTypes li {
+    background-color: #555;
     display: inline-block;
-}
-#formTypes li a {
-    color:#FFF;
-    background-color: #5f69d8;
-    text-decoration: none;
-    padding:2px 7px;
-    border-radius: 4px;
-    font-size: 14px;
-}
-#formTypes li .active {
-    background-color: #7dabd8;
-    cursor: default;
-}
-#newpostForm .form-group {
-    padding:10px;
-    padding-left: 0px;
-}
-#newpostForm .form-group label{
-    display: block;
-}
-#newpostForm .form-group textarea {
-    width: 90%;
-    height: 100px;
-    max-width: 90%;
-    max-height: 200px;
-    overflow: auto;
-    outline: none;
-}
-#newpostForm .form-group #title,#newpostForm .form-group #link{
-    width: 90%;
-    max-width: 90%;
-    height:20px;
-    max-height: 40px;
-}
-#newpostForm .form-group textarea:focus {
-    border: 1px solid #5f69d8;
-}
-#newpostForm .button:hover {
-    cursor: pointer;
-    background-color:#7495d8; 
-}
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer; }
+    #formTypes li a {
+      cursor: pointer;
+      color: #FFF;
+      padding: 10px 9px;
+      text-decoration: none;
+      font-weight: 300; }
+  #formTypes li.active {
+    background-color: #DDD;
+    cursor: default; }
+    #formTypes li.active a {
+      color: #111;
+      cursor: default; }
+  #formTypes li.newpost {
+    background-color: #5f69d8; }
+
+#form {
+  padding-left: 40px;
+  display: inline; }
+  #form h4 {
+    text-align: left;
+    color: #000000;
+    font-size: 24px; }
+  #form form {
+    text-align: left; }
+    #form form .form-group {
+      padding: 10px 0px; }
+      #form form .form-group label {
+        display: block;
+        padding-bottom: 10px;
+        font-size: 18px; }
+      #form form .form-group textarea {
+        padding: 5px;
+        border-radius: 4px;
+        outline: none;
+        border: 1px solid #888;
+        width: 400px;
+        max-width: 600px;
+        height: 100px;
+        max-height: 300px; }
+        #form form .form-group textarea:focus {
+          border: 1px solid #5f69d8; }
+      #form form .form-group input {
+        outline: none;
+        border: 1px solid #888;
+        padding: 5px;
+        width: 90%;
+        max-width: 400px; }
+        #form form .form-group input:focus {
+          border: 1px solid #5f69d8; }
+      #form form .form-group .button {
+        padding: 10px 16px;
+        background-color: #288b1b;
+        font-size: 16px;
+        cursor: pointer; }
+
+/*# sourceMappingURL=newPost.css.map */

@@ -27,8 +27,12 @@ exports = module.exports = function(req, res) {
         
         // If username
         if(req.body.username.length>1){
+
+            if (typeof res.locals.user=="undefined"){
+                view.render('/',index.sessionInfos(req,res));
+
             // Are the two fields equals
-            if(req.body.username !== req.body.usernameConfirmation){
+            }else if(req.body.username !== req.body.usernameConfirmation){
                 req.flash('error', 'The two usernames do not match');
                 view.render('account',index.sessionInfos(req,res));
 

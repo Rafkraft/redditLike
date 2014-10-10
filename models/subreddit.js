@@ -3,70 +3,166 @@ mongoose.connect('mongodb://localhost/my-project');
 var _ = require('underscore');
 
 var subreddits= [
-    'histoire',
-    'politique',
-    'sante',
-    'yoga'
+    {
+        name:'histoire',
+        completeName:'Histoire',
+        description:""
+    },
+    {
+        name:'politique',
+        completeName:'Politique',
+        description:""
+    },
+    {
+        name:'sante',
+        completeName:'Santé',
+        description:""
+    },
+    {
+        name:'yoga',
+        completeName:'Yoga',
+        description:""
+    }
 ];
 
 // ===============
-// Subreddits Schemas
+// comments
 // ===============
 
-var Schema = mongoose.Schema;
+var Comment = mongoose.Schema;
 
-var subredditPostSchema = new Schema({
-    type:String,
-    title:String,
-    link:String,
+var commentSchema = new Comment({
+    createdOn:Date,
+    userName:String,
+    userId:String,
     content:String,
-    commentsNumber:Number,
-    comments:[],
-    author:String,
-    authorId:String,
     upVotes:[],
     downVotes:[],
-    rank:Number,
-    createdOn:Date   
+    upVotesNumber:Number,
+    id:Number
 });
 
-
 // ===============
-// subredditsList Collection
+// Subreddits Posts Schemas
 // ===============
 
 var Schema = mongoose.Schema;
-var subredditsListSchema = new Schema({
-    name:String,
-    postsNumber:Number,
+
+// Declaring new schema
+var subredditPostSchema = exports.subredditSchema = new Schema({
+    //  Post
+    title:String,
+    urlTitle:String,
+    type:String,
+    text: String,
+    link:String,
+    subReddit:String,
+
+    //  Author / Creation
+    authorId:Schema.ObjectId,
+    authorUsername:String,
+    createdOn:Date,
+
+    // Comments / Votes / Rank
+    comments:[commentSchema],
     commentsNumber:Number,
-    createdOn:Date   
+    upVotes:[],
+    downVotes:[],
+    votesDifference:Number,
+    rank:Number,
+});
+
+// ===============
+// subredditsList Collection Schema
+// ===============
+
+var ListSchema = mongoose.Schema;
+var subredditsListSchema = new ListSchema({
+    //  Basic infos
+    name:String,
+    completeName:String,
+    description:String,
+    createdOn:Date,
+    active:Boolean,
+
+    // Activity
+    activity:Number,
+    postsNumber:Number,
+    lastPost:[],
+    commentsNumber:Number,
+    lastComment:[]
+    
 });
 mongoose.model("subredditsList", subredditsListSchema);
 
 
 _.each(subreddits,function(value,index){
-    mongoose.model("subredditsList").find({'name':value},function(err,sub){
+    mongoose.model("subredditsList").find({'name':value.name},function(err,sub){
+
         // If Subreddit is in subredditsList collection, instanciate new schema
         if(sub.length){
-            console.log('found for '+value);
-            // Does the _subreddit colelction exists ?
-            mongoose.model("_"+value, subredditPostSchema);
+            console.log('found for '+value.name);
+
+            // Declaring new model
+            mongoose.model("_"+value.name, subredditPostSchema);
+
+
         // If not, add to 
         }else{
-            console.log('not found for '+value+' adding now');
+            console.log('not found for '+value.name+' adding now');
             var sub = mongoose.model("subredditsList", subredditsListSchema);
             var s = new sub({
-                name:value,
-                postsNumber:0,
+                name:value.name,
+                description:value.description,
+                completeName:value.completeName,
+                createdOn:new Date(),
+                activity:0,
+                active:true,
+                postsNumber:1,
+                lastPost:[],
                 commentsNumber:0,
-                createdOn:new Date()
+                lastComment:[]
             })
             s.save(function(err){
                 console.log(err);
+
+                // Declaring new model
+                mongoose.model("_"+value.name, subredditPostSchema);
+
             })
-            mongoose.model("_"+value, subredditPostSchema);
         }
-        //console.log(err);
+        if(err)
+            console.log(err);
     });
 })
+
+
+/*
+var post = mongoose.model("_histoire", subredditPostSchema);
+
+var p = new post({
+    //  Post
+    title:"SARKO IS BACK",
+    type:"link",
+    text: "super swagg bla bl bla bl abl ablablbla ",
+    link:"",
+    subReddit:"histoire",
+
+    //  Author / Creation
+    authorId:"542d2f06e01a70bf05b09de6",
+    authorUsername:"swaggg",
+    createdOn:new Date(),
+
+    //  Comments / Votes / Rank
+    comments:[],
+    commentsNumber:0,
+    upVotes:[],
+    downVotes:[],
+    rank:0,
+})
+
+p.save(function(err,post){
+    console.log(post);
+})
+*/
+

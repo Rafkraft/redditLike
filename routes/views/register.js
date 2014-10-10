@@ -71,11 +71,18 @@ exports = module.exports = function(req, res) {
                             var userUsername = req.body.username;
 
                             new User.model({
+                                adminSubreddits:[],
+                                canAccessKeystone: false,
+                                createdOn:new Date(),
+                                description:"",
+                                downVotes:0,
+                                email: userEmail,   // custom
+                                isAdmin: false,
                                 name: { first: 'super', last: 'swagg'},
-                                email: userEmail,
-                                password: userPassword,
-                                userName: userUsername,
-                                canAccessKeystone: false
+                                password: userPassword, // custom
+                                posts:[],
+                                upVotes:0,
+                                userName: userUsername,   // custom
                             }).save(function(error,data){                        
                                 req.flash('info', 'Thank you for subscribing, you can now log in');
                                 res.redirect('/login');

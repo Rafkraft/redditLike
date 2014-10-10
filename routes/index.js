@@ -1,6 +1,8 @@
 var keystone = require('keystone'),
     middleware = require('./middleware'),
     importRoutes = keystone.importer(__dirname);
+var async = require('async');
+var mongoose = require('mongoose');
 
 var flash = require('flash');
  
@@ -32,10 +34,13 @@ keystone.set('500', function(err, req, res, next) {
 
 // Load Routes
 var routes = {
-    views: importRoutes('./views')
+    views: importRoutes('./views'),
+    feed: importRoutes('./feed')
 };
 
 exports.sessionInfos = function(req,res){
+    var canReturn= false;
+
     if (typeof res.locals.user=="undefined"){
         connected= false;
         userEmail= null;
@@ -46,7 +51,6 @@ exports.sessionInfos = function(req,res){
         userEmail= res.locals.user.email;
         userName=res.locals.user.userName;
     }
-
     var toReturn = {
         error:req.flash('error')[0] ,
         info:req.flash('info')[0] ,
@@ -54,12 +58,43 @@ exports.sessionInfos = function(req,res){
         userEmail:userEmail,
         userName:userName
     };
-    return toReturn;
+
+    if(req.params.sub){
+        toReturn.subReddit = req.params.sub
+    
+        async.series([
+            function(callback){
+                mongoose.model('subredditsList').findOne({ "name":req.params.sub},function(err,subs){
+                    callback(null, subs);
+                })
+            }
+        ],
+        function(err, results){
+            if(results[0]== null){
+                console.log('not found')
+            }else{
+                console.log('found');
+                toReturn.completeName = results[0].completeName;
+                toReturn.description = results[0].description;
+                toReturn.subReddit = results[0].name;
+                canReturn=true
+            }
+        });
+    }else{
+        canReturn=true;
+    }
+    while(!canReturn){
+        return toReturn;
+    }    
 }
 
 
 // Bind Routes
 exports = module.exports = function(app) {
+    //Feeds
+    app.get('/feed/:sub',routes.feed.subreddit);
+    app.get('/feed/:sub/:post',routes.feed.post);
+
     app.get('/', routes.views.index);
     app.get('/login', routes.views.login);
     app.post('/login', routes.views.login);
@@ -69,5 +104,16 @@ exports = module.exports = function(app) {
     app.get('/account', routes.views.account);
     app.post('/account', routes.views.account);
     app.get('/r/:sub',routes.views.subreddit);
+    app.post('/r/:sub',routes.views.subreddit);
+    app.get('/r/:sub/newpost',routes.views.newpost);
+    app.post('/r/:sub/newpost',routes.views.newpost);
+    app.post('/r/:sub/newVote',routes.views.newVote);
+
+    app.get('/r/:sub/:post',routes.views.post);
+    app.post('/r/:sub/:post',routes.views.post);
+
+
 }
+
+
 

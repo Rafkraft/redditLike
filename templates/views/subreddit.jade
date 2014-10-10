@@ -1,9 +1,12 @@
 extends ../layouts/base
  
 block content
+    link(href="/css/fontello/css/fontello.css", rel="stylesheet")
     link(href="/css/forms.css", rel="stylesheet")
+    link(href="/css/subReddit.css", rel="stylesheet")
+    script(type='text/javascript' src="/js/subreddit.js")
     
-    h2 Subreddit  
+    h2 #{completeName} 
     if typeof info !== "undefined"
         .info.message
             h5 #{info}
@@ -11,12 +14,35 @@ block content
         .error.message
             h5 #{error}
 
-    ul
-        each val in posts
-            if val.type =="link"
-                li
-                    a(href="#{val.link}") #{val.title}
-            if val.type =="text"
-                li
-                    p #{val.title}
+    script.                                              
+        window.subReddit ="#{subReddit}";
+
+    div#nav
+        ul
+            li.newpost
+                a.icon-edit(href="/r/#{subReddit}/newpost") New Post
+
+
+    div#main
+
+    div#lol
+
+    script(type="text/template" id="itemTemplate")
+        div.left
+            div
+                div
+                    span.arrow.icon-up-open
+                div
+                    span
+                        <%=upVotes%>
+                div
+                    span.arrow.icon-down-open
+        div.right
+            h4 <%=title%>
+            h5.comments <%=comments%>
+            h5.date <%=date%>
+            span <%=icon%>
+
+
+
 

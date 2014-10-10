@@ -23,13 +23,22 @@ exports = module.exports = function(req, res) {
         }else {
             var onSuccess = function(user) {
                 if (req.query.from && req.query.from.match(/^(?!http|\/\/|javascript).+/)) {
+                    console.log('super1')
                     res.redirect(req.query.from);
                 } else if ('string' === typeof keystone.get('signin redirect')) {
+                    console.log('super2')
                     res.redirect(keystone.get('signin redirect'));
                 } else if ('function' === typeof keystone.get('signin redirect')) {
+                    console.log('super3')
                     keystone.get('signin redirect')(user, req, res);
                 } else {
-                    res.redirect('/');
+                    console.log('super')
+                    console.log(req);
+                    if(req.body.next){
+                        res.redirect(req.body.next);
+                    }else{
+                        res.redirect("/");
+                     }
                 }
             };
             var onFail = function() {

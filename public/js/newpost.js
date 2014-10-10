@@ -1,43 +1,40 @@
 $(document).ready(function(){
 
-    var Router = Backbone.Router.extend({
-        initialize: function(){ 
-            Backbone.history.start();
-        },
-        routes: {
-            ":query":"form",
-            "/*":"default"
-        },
-        form:function(query){
-            if(query=="text"){
-                App.newpostForm.show(new TextFormView());
-            }else if (query=="link"){
-                App.newpostForm.show(new LinkFormView());
-            }
-        },
-        default:function(){
-            this.form("text");
-        }
-    })
-
     var TextFormView = Backbone.Marionette.ItemView.extend({
         template: "#textFormTemplate",
+        id:"form"
     });
 
     var LinkFormView = Backbone.Marionette.ItemView.extend({
         template: "#linkFormTemplate",
+        id:"form"
     });
 
     var App = new Backbone.Marionette.Application();
 
     App.addRegions({
-        newpostForm: '#newpostForm'
+        main: '#main'
     });
 
     App.on("start", function(options){
-        new Router();
+        App.main.show(new TextFormView());
     });
 
     App.start();
+
+
+    $('.link').click(function(){
+        App.main.show(new LinkFormView());
+        $('#formTypes li').removeClass();
+        $('.link').parent().addClass('active');
+    })
+    $('.text').click(function(){
+        console.log('text')
+        App.main.show(new TextFormView());
+        $('#formTypes li').removeClass();
+        $('.text').parent().addClass('active');
+    })
+
+
 
 })
