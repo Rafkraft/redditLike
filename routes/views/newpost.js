@@ -217,7 +217,9 @@ exports = module.exports = function(req, res) {
                                     id:id,
                                     subReddit:newPostSub,
                                     postId:newPostId,
-                                    createdOn:new Date()
+                                    createdOn:new Date(),
+                                    urlTitle:urlTitle,
+                                    title:req.body.title
                                 })
                             user.save();
                         })

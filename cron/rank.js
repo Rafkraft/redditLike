@@ -51,31 +51,20 @@ var rankPosts = new CronJob('10 * * * * 0-6', function(){
                             }else if(Math.abs(x)<1){
                                 z=1;
                             }
-                            // +9 votes = +30h, +99 votes = +60h, -9votes = -30h...
+                            /* 
+                            +9 votes = +60h, +99 votes = +120h, -9votes = -90h...
+                            The bigger the factor is, the more the votes count
+                            */
+                            var factor = 60;
                             function rank(t,y,z){
                                 var hours = t;
                                 var log = Math.log(z)/Math.log(10);
-                                var bonus = log*y*30
+                                var bonus = log*y*factor;
                                 return t+bonus;
                             }
 
-                            
-                            //console.log('a = '+a);
-                            //console.log('b = '+b);
-                            //console.log('createdOn : '+subs[i].createdOn)
-                            //console.log('t = '+t);
-                            //console.log('log(z)'+Math.log(z)/Math.log(10))
-                            //console.log('y = '+y);
-                            //console.log('z = '+z);
-                            //console.log("log10(z) = "+Math.log(z)/Math.log(10))
-                            //console.log("rank = "+rank(t,y,z))
-                            //console.log('______');
-                            
-
                             subs[i].rank =rank(t,y,z);
                             subs[i].save();
-                            //console.log('SUB SAVED');
-                            //console.log(rank(t,y,z));
                         }
 
                     })

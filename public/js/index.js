@@ -20,7 +20,12 @@ $(document).ready(function(){
     // sub ItemView
     var subRedditsListItemView = Backbone.Marionette.ItemView.extend({
         template: "#subTemplate",
-        tagName:"li .subRedditsListItem",
+        tagName:"li",
+        className:"subRedditsListItem",
+        initialize:function(){
+            this.templateHelpers={};
+            this.templateHelpers.postsNumber=this.model.get('postsNumber')+" posts"
+        },
         events:{
             "click":"go"
         },
@@ -205,6 +210,8 @@ $(document).ready(function(){
         });
     });
     App.start();
+
+    //EVENTS
     $('.subRedditsLink').click(function(e){
         e.preventDefault();
         $('#indexNav li').removeClass('active');

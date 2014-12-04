@@ -12,6 +12,7 @@ $clear-blueHover:#6981e1;
 	#subRedditsList{
 		padding:0;
 		li{
+			position: relative;
 			list-style: none;
 			height:130px;
 			width:31%;
@@ -32,8 +33,17 @@ $clear-blueHover:#6981e1;
 				height:100%;
 				padding:5px;
 				overflow: hidden;
+				position: relative;
 				p.description{
 					font-size: 13px;
+				}
+				.postsNumber{
+					position: absolute;
+					top:0px;
+					text-align: right;
+					right:10px;
+					font-size: 13px;
+					border-bottom: 1px solid #111;
 				}
 			}
 			&:hover{
