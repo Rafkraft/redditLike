@@ -4,13 +4,13 @@ block content
     link(href="/css/forms.css", rel="stylesheet")
     
     #login.form
-        h2 Log in  
-        if typeof info !== "undefined"
-            .info.message
-                h5 #{info}
-        if typeof error !== "undefined"
-            .error.message
-                h5 #{error}
+        .message
+            if typeof info !== "undefined"
+                .info
+                    h5 #{info}
+            if typeof error !== "undefined"
+                .error
+                    h5 #{error}
 
         form(method="post" action="", novalidate).auth-form
             input(type='hidden', name=csrf_token_key, value=csrf_token_value)

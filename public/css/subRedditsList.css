@@ -1,0 +1,127 @@
+/* line 11, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+.subRedditsList {
+  text-align: left;
+  width: 100%;
+  max-width: 800px;
+  padding: 0; }
+  /* line 17, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+  .subRedditsList > li {
+    position: relative;
+    margin: 10px;
+    display: block;
+    color: #111;
+    list-style: none;
+    background-color: #5f69d8;
+    border: #5f69d8 solid #222;
+    overflow: hidden;
+    font-weight: 400;
+    box-shadow: -1px 1px 0px #363c7b, -2px 2px 0px #363c7b, -3px 3px 0px #363c7b, -4px 4px 0px #363c7b, -5px 5px 0px #363c7b; }
+    /* line 34, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+    .subRedditsList > li .left {
+      margin: 0;
+      position: relative;
+      height: 100px;
+      width: 4%;
+      max-width: 100px;
+      display: table-cell;
+      background-color: #5f69d8;
+      overflow: hidden; }
+      /* line 45, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+      .subRedditsList > li .left > div {
+        display: table;
+        height: 100%;
+        padding: 0px 10px;
+        padding-top: 0.5em;
+        vertical-align: middle; }
+        /* line 51, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+        .subRedditsList > li .left > div div {
+          width: 100%;
+          display: block;
+          position: relative;
+          text-align: center;
+          height: 2.1em; }
+          /* line 57, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+          .subRedditsList > li .left > div div span {
+            vertical-align: middle;
+            width: 100%;
+            text-align: center;
+            color: #FFF; }
+          /* line 63, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+          .subRedditsList > li .left > div div span.arrow {
+            cursor: pointer;
+            -webkit-transition-timing-function: ease-out;
+            -webkit-transition-duration: 150ms;
+            -moz-transition-timing-function: ease-out;
+            -moz-transition-duration: 150ms;
+            transition-timing-function: ease-out;
+            transition-duration: 150ms; }
+            /* line 71, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+            .subRedditsList > li .left > div div span.arrow:hover {
+              color: #000; }
+    /* line 78, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+    .subRedditsList > li .right {
+      margin: 0;
+      height: 90%;
+      max-width: 600px;
+      padding-left: 10px;
+      position: relative;
+      display: table-cell;
+      vertical-align: top;
+      background-color: #95c2f4;
+      -webkit-transition-timing-function: ease-out;
+      -webkit-transition-duration: 150ms;
+      -moz-transition-timing-function: ease-out;
+      -moz-transition-duration: 150ms;
+      transition-timing-function: ease-out;
+      transition-duration: 150ms; }
+      /* line 93, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+      .subRedditsList > li .right:hover {
+        background-color: #738df4; }
+      /* line 96, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+      .subRedditsList > li .right h4 {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        width: 90%;
+        max-width: 600px;
+        top: 15px;
+        left: 10px;
+        font-weight: 400; }
+        /* line 106, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+        .subRedditsList > li .right h4 a {
+          color: #142978;
+          border-bottom: 1px solid #5f69d8;
+          text-decoration: none; }
+      /* line 112, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+      .subRedditsList > li .right h5.comments {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-weight: 400; }
+        /* line 119, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+        .subRedditsList > li .right h5.comments a {
+          color: #000;
+          border-bottom: 1px solid #000;
+          text-decoration: none;
+          font-size: 12px; }
+      /* line 126, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+      .subRedditsList > li .right h5.date {
+        margin: 0;
+        padding: 0;
+        padding-top: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-size: 12px;
+        font-weight: 400; }
+      /* line 136, /Users/Charles/Development/rafdev/redditLike/public/css/subRedditsList.scss */
+      .subRedditsList > li .right i {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 18px;
+        color: #333; }
+
+/*# sourceMappingURL=subRedditsList.css.map */

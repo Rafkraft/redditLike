@@ -1,32 +1,25 @@
 $(document).ready(function(){
 
+
+    // Fill #text is error comment
+    if (window.comment){
+        $('#text').val(window.comment);
+    }
+
     // ================
     // ROUTER
     // ================
     var Router = Backbone.Router.extend({
         initialize: function(){
-            Backbone.history.start();
-        },
-        routes: {
-            "newpost":"form",
-            "newpost/:query":"formS",
-            "/*":"home"
-        },
-        home:function(){
-            console.log('home');
-            App.main.show(new collectionView({collection:mainCollection}))
-        },
-        form:function(){
-            console.log('form');
-            App.main.show(new textFormView());
-        },
-        formS:function(query){
-            if(query=="text")
-                App.main.show(new textFormView());
-            else if(query=="link")
-                App.main.show(new linkFormView());
-            else 
-                App.main.show(new textFormView());
+            console.log("lolololol");
+            console.log(mainCollection);
+            if(mainCollection.length==0){
+                console.log("zero");
+                App.main.show(new emptyView());
+            }else{
+                console.log("not zero");
+                App.main.show(new collectionView({collection:mainCollection}))
+            }
         }
     })
 
@@ -44,32 +37,15 @@ $(document).ready(function(){
     // ================
     // MAIN MODEL
     // ================
-    var Model = Backbone.Model.extend({});
-    var model = new Model();
-
-    // ================
-    // MAIN COLLECTION
-    // ================
-    window.MainCollection = Backbone.Collection.extend({
-        url:window.location.origin+"/feed/"+window.subReddit
-    });
-    mainCollection = new MainCollection();
-
-    // ================
-    // COLLECTION VIEW / ITEM VIEW
-    // ================
-    var itemView = Backbone.Marionette.ItemView.extend({
-        events:{
-            "click .icon-up-open":"upVote",
-            "click .icon-down-open":"downVote",
-        },
-        tagName:"li",
-        initialize:function(options){
-            this.templateHelpers = {};
+    var Model = Backbone.Model.extend({
+        initialize:function(){
+            //timestamp
+            var d = new Date(this.get('createdOn'));
+            this.set('timestamp',d.getTime()/3600000);
 
             // Date handling
             var postDate="";
-            var date = new Date(this.model.get('createdOn'));
+            var date = new Date(this.get('createdOn'));
             var currentDate = new Date();
             var months=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
             if(currentDate.getMonth()==date.getMonth()&&currentDate.getDay()==date.getDay()){
@@ -88,11 +64,87 @@ $(document).ready(function(){
                 minutes = "0"+date.getMinutes();
 
             postDate+=' à '+hours+'h'+minutes;
-            
-            
-            this.model.set('date',postDate);
-            this.model.set('upVotesNumber',this.model.get('upVotes').length);
-            this.model.set('downVotesNumber',this.model.get('downVotes').length);
+            this.set('date',postDate);
+
+            // upVotesNumber / downVotesNumber
+            this.set('upVotesNumber',this.get('upVotes').length);
+            this.set('downVotesNumber',this.get('downVotes').length);
+        }
+    });
+
+    // ================
+    // MAIN COLLECTION
+    // ================
+    window.MainCollection = Backbone.Collection.extend({
+        model:Model,
+        url:"/feed/"+window.subReddit+"?type=sub&sub="+window.subReddit+"&sort=rank",
+        comparator:function(model) {
+            return -model.get('rank');
+        }
+    });
+    mainCollection = new MainCollection();
+
+    // ================
+    // EVENTS : SORT COLLECITON ON CLICK
+    // ================
+    function sortAndRender(sort){
+        if(mainCollection.length==0){
+            App.main.show(new emptyView());
+        }else{
+            var SortedModels;
+            switch(sort){
+                case "recents":
+                    SortedModels = _.sortBy(mainCollection.models, function(model){ 
+                        return -model.attributes.timestamp;
+                    });
+                    break;
+                case "populars":
+                    SortedModels = _.sortBy(mainCollection.models, function(model){ 
+                        return -model.attributes.rank;
+                    });                 
+                    break;            
+            }
+            var SortedCollection = Backbone.Collection.extend({});
+            var sortedCollection = new SortedCollection();
+            _.each(SortedModels,function(value,index){
+                sortedCollection.add(value);
+            })
+            App.main.show(new collectionView({collection:sortedCollection}))
+        }
+    }
+
+    $('#postsListType .popularsLink').click(function(e){
+        e.preventDefault();
+        $('#postsListType li').removeClass('active');
+        $(e.currentTarget).parent().addClass('active');
+
+        sortAndRender("populars");
+    })
+    $('#postsListType .recentsLink').click(function(e){
+        e.preventDefault();
+        $('#postsListType li').removeClass('active');
+        $(e.currentTarget).parent().addClass('active');
+
+        sortAndRender("recents");
+    })
+
+    // ================
+    // COLLECTION VIEW / ITEM VIEW
+    // ================
+    var itemView = Backbone.Marionette.ItemView.extend({
+        template : "#itemTemplate",
+        events:{
+            "click .icon-up-open":"upVote",
+            "click .icon-down-open":"downVote",
+        },
+        tagName:"li",
+        className:function(){
+            return "post_"+this.model.get('_id')
+        },
+        initialize:function(options){
+
+            this.templateHelpers = {};
+
 
             //Type
             if(this.model.get('type')=='text'){
@@ -118,80 +170,90 @@ $(document).ready(function(){
 
             this.templateHelpers.date=this.model.get('date')
             this.templateHelpers.date +="<br> publié par <a href='../../user/"+this.model.get('authorUsername')+"'>"+this.model.get('authorUsername')+"</a>";
-            this.templateHelpers.upVotes = this.model.get('votesDifference');
+
+            //Votes difference
+            if(this.model.get('votesDifference')>0){
+                this.templateHelpers.votesDifference = "+"+this.model.get('votesDifference');
+            }else{
+                this.templateHelpers.votesDifference = this.model.get('votesDifference');
+            }
         },
-        template : "#itemTemplate",
         upVote:function(){
-            var url;
-            if(window.location.href.substr(window.location.href.length -1)=='/')
-                url=window.location.href+"newVote"
-            else
-                url=window.location.href+"/newVote"
-            data= {
+            var that=this;
+            var url = window.location.origin+"/r/"+window.subReddit+"/newVote";
+            var data= {
                 "postType":"postVote",
                 "vote":"up",
                 "subReddit":window.subReddit,
                 "postId":this.model.get('_id')
             }
-            if(userInfos.connected){
+            if(userInfos.connected){          
                 $.ajax({
                     type: "POST",
                     url: url,
                     data: data,
                     dataType: "text",
                     success: function(data) {
-                        console.log(data);
+                        var vd = parseInt(jQuery.parseJSON(data).votesDifference);
+                        var u = $('.subRedditsList').find('.post_'+that.model.get('_id')).find('.votesDifference span');       
+                        if(vd<0){
+                            $(u).html(vd);
+                        }else if(vd==0){
+                            $(u).html("0")
+                        }else if(vd>0){
+                            $(u).html("+"+vd)
+                        }
                     }
                 });
             }else{
-                var coucou;
+                alert('you are not connected')
             }
         },
         downVote:function(){
-            var url;
-            if(window.location.href.substr(window.location.href.length -1)=='/')
-                url=window.location.href+"newVote"
-            else
-                url=window.location.href+"/newVote"
-            data= {
+            var that=this;
+            var url = window.location.origin+"/r/"+window.subReddit+"/newVote";
+            var data= {
                 "postType":"postVote",
                 "vote":"down",
                 "subReddit":window.subReddit,
                 "postId":this.model.get('_id')
             }
-            if(userInfos.connected){
+            if(userInfos.connected){          
                 $.ajax({
                     type: "POST",
                     url: url,
                     data: data,
                     dataType: "text",
                     success: function(data) {
-                        console.log(data);
+                        var vd = parseInt(jQuery.parseJSON(data).votesDifference);
+                        var u = $('.subRedditsList').find('.post_'+that.model.get('_id')).find('.votesDifference span');
+                        if(vd<0){
+                            $(u).html(vd);
+                        }else if(vd==0){
+                            $(u).html("0")
+                        }else if(vd>0){
+                            $(u).html("+"+vd)
+                        }
                     }
                 });
             }else{
-                var coucou;
+                alert('you are not connected')
             }
         }
     })
 
     var collectionView= Backbone.Marionette.CollectionView.extend({
-        model:model,
         id:"subRedditsList",
+        className:"subRedditsList",
         tagName:"ul",
         childView: itemView
     });
 
-    // Text form view
-    var textFormView = Backbone.Marionette.ItemView.extend({
-        id:"form",
-        template: "#textFormTemplate",
-    });
 
     // Link form view
-    var linkFormView = Backbone.Marionette.ItemView.extend({
+    var emptyView = Backbone.Marionette.ItemView.extend({
         id:"form",
-        template: "#linkFormTemplate",
+        template: "#emptyTemplate",
     });
 
     // ================
@@ -205,7 +267,7 @@ $(document).ready(function(){
     App.on("start", function(options){
         new Router();
         mainCollection.fetch().done(function(){
-            console.log(mainCollection);
+            new Router();
         });
     });
     App.start();

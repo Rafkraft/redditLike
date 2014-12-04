@@ -1,6 +1,6 @@
 mongoose=require('mongoose');
 var _ = require('underscore');
-mongoose.connect('mongodb://localhost/my-project');
+//mongoose.connect('mongodb://localhost/my-project');
 
 var Schema = mongoose.Schema;
 

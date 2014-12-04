@@ -12,34 +12,21 @@ exports = module.exports = function(req, res) {
     console.log(req.params.post);
 
     if (req.method === 'GET') {
-        async.series([
-            function(callback){
-                mongoose.model('subredditsList').findOne({ "name":req.params.sub},function(err,subs){
-                    callback(null, subs);
-                })
+        mongoose.model('_'+req.params.sub).find({ "urlTitle":req.params.post},function(err,post){
+            if(err){
+                console.log(err);
             }
-        ],
-        function(err, results){
-            if(results[0]== null){
-                view.res.send('{error:"collection does not exist"}')
+               
+            //console.log(posts);
+            if(post.length>0){
+                // There is at least 1 post in the collection
+                //
+                view.res.send(post)   
             }else{
-                mongoose.model('_'+req.params.sub).find({ "urlTitle":req.params.post},function(err,post){
-                    if(err){
-                        console.log(err);
-                    }
-                       
-                    //console.log(posts);
-                    if(post.length>0){
-                        // There is at least 1 post in the collection
-                        //
-                        view.res.send(post)   
-                    }else{
-                        // There is not post in the collection
-                        //
-                        view.res.send('{error:"there is no post in this collection"}')
-                    }
-                })
+                // There is not post in the collection
+                //
+                view.res.send('{error:"there is no post in this collection"}')
             }
-        });
+        })
     }
 };

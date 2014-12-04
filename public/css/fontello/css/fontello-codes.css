@@ -10,3 +10,5 @@
 .icon-link:before { content: '\e808'; } /* '' */
 .icon-align-left:before { content: '\e809'; } /* '' */
 .icon-block:before { content: '\e80a'; } /* '' */
+.icon-left-dir:before { content: '\e80b'; } /* '' */
+.icon-home:before { content: '\e80c'; } /* '' */

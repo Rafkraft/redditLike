@@ -1,0 +1,38 @@
+/* line 1, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+.navContainer {
+  padding: 5px 0px;
+  background: #444;
+  width: 100%;
+  position: relative; }
+  /* line 6, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+  .navContainer .nav {
+    margin: 0px auto;
+    width: 100%;
+    max-width: 1200px;
+    color: #FFF; }
+    /* line 11, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+    .navContainer .nav .col-lg-2 {
+      text-align: center; }
+    /* line 14, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+    .navContainer .nav .btn-primary {
+      border: none;
+      background-color: rgba(0, 0, 0, 0);
+      box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.4) inset; }
+      /* line 18, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+      .navContainer .nav .btn-primary:hover {
+        background-color: rgba(100, 100, 100, 0.1); }
+    /* line 22, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+    .navContainer .nav .userEmail {
+      box-shadow: none;
+      border: none;
+      background-color: rgba(0, 0, 0, 0); }
+    /* line 27, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+    .navContainer .nav .userEmail {
+      background-color: rgba(0, 0, 0, 0); }
+    /* line 30, /Users/Charles/Development/rafdev/redditLike/public/css/nav.scss */
+    .navContainer .nav .title {
+      color: #FFF;
+      box-shadow: none;
+      font-size: 16px; }
+
+/*# sourceMappingURL=nav.css.map */

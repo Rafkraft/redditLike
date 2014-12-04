@@ -5,12 +5,13 @@ block content
 
     #account.form
         h2 Account
-        if typeof info !== "undefined"
-            .info.message
-                h5 #{info}
-        if typeof error !== "undefined"
-            .error.message
-                h5 #{error}
+        .message
+            if typeof info !== "undefined"
+                .info
+                    h5 #{info}
+            if typeof error !== "undefined"
+                .error
+                    h5 #{error}
         form(method="post" action="", novalidate).auth-form
             input(type='hidden', name=csrf_token_key, value=csrf_token_value)
 
@@ -39,5 +40,5 @@ block content
             //    label(for='password') New password (again)
             //    input(type='password', name='passwordSecond').form-control
             div.form-group
-                button(type='submit').btn.btn-primary Sign In
+                button(type='submit').btn.btn-primary Send
 

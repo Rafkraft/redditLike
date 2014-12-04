@@ -1,33 +1,31 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600italic,600,400italic);
+/* line 12, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
 #main {
   padding-left: 40px; }
 
-#nav {
-  display: inline; }
-  #nav ul {
-    display: block;
-    text-align: left;
-    padding-left: 40px; }
-    #nav ul li {
-      display: inline-block;
-      border-radius: 3px;
-      padding: 5px; }
-      #nav ul li a {
-        color: #FFF;
-        padding: 10px 9px;
-        text-decoration: none;
-        font-weight: 300; }
+/* line 16, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+#nav ul {
+  padding-left: 40px; }
 
+/* line 20, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
 #post {
   width: 90%;
   max-width: 800px;
   padding-top: 20px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #444; }
+  border-radius: 3px;
+  border: 1px solid #27748f;
+  box-shadow: 0px 0px 12px #8598f7 inset;
+  background: #f3f6ff; }
+  /* line 21, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+  #post > div {
+    padding: 0px 10px; }
+  /* line 32, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #post h2 {
     text-align: left;
     font-size: 22px;
     font-weight: 400; }
+    /* line 36, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #post h2 i {
       color: #444;
       cursor: pointer;
@@ -37,61 +35,81 @@
       -moz-transition-duration: 150ms;
       transition-timing-function: ease-out;
       transition-duration: 150ms; }
+      /* line 45, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
       #post h2 i:hover {
         color: #000; }
+    /* line 49, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #post h2 i.icon-up-open {
       margin-left: 30px; }
+    /* line 52, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #post h2 span.votesDifference {
       margin-left: 10px; }
+  /* line 56, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #post h5.date {
     text-align: left;
     font-weight: 300;
     margin: 0;
     padding: 0; }
+  /* line 62, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #post p.content {
     white-space: pre-wrap;
     font-size: 14px;
     border-radius: 3px;
-    border: 1px solid #666;
+    border: 1px solid #AAA;
+    background: #FFF;
     padding: 20px 10px;
     margin: 30px 0px; }
+  /* line 71, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #post h5.commentsNumber {
     text-align: left;
     padding: 0;
     margin: 0; }
+  /* line 76, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #post p {
     white-space: pre-wrap;
     text-align: left; }
 
+/* line 81, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
 #commentsArea {
   text-align: left; }
+  /* line 83, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #commentsArea #form {
-    display: inline; }
+    padding: 10px 0px; }
+    /* line 85, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #commentsArea #form h4 {
       text-align: left;
       color: #000000;
       font-size: 24px; }
+    /* line 90, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #commentsArea #form .notConnected {
       text-align: left;
       padding: 6px;
       display: inline;
       border-radius: 3px;
-      background-color: #444;
-      color: #FFF;
+      color: #000;
+      border: 1px solid #444;
       font-size: 13px;
       margin: 15px 0px; }
+      /* line 99, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
       #commentsArea #form .notConnected i.icon-block {
         padding: 0px 20px; }
+      /* line 102, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
       #commentsArea #form .notConnected span {
         padding-left: 0px; }
+    /* line 106, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #commentsArea #form form {
       text-align: left; }
+      /* line 108, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
       #commentsArea #form form .form-group {
-        padding: 10px 0px; }
+        padding: 10px 0px;
+        padding-bottom: 0px;
+        margin-bottom: 0px; }
+        /* line 112, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
         #commentsArea #form form .form-group label {
           display: block;
           padding-bottom: 10px;
           font-size: 18px; }
+        /* line 117, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
         #commentsArea #form form .form-group textarea {
           border-radius: 4px;
           outline: none;
@@ -100,62 +118,167 @@
           max-width: 600px;
           height: 100px;
           max-height: 300px; }
+          /* line 125, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
           #commentsArea #form form .form-group textarea:focus {
             border: 1px solid #5f69d8; }
+        /* line 129, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+        #commentsArea #form form .form-group input {
+          display: inline-block;
+          border-radius: 4px;
+          outline: none;
+          border: 1px solid #888;
+          max-width: 40px;
+          padding: 5px; }
+          /* line 136, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+          #commentsArea #form form .form-group input:focus {
+            border: 1px solid #5f69d8; }
+        /* line 140, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
         #commentsArea #form form .form-group .button {
-          padding: 10px 16px;
+          padding: 6px 16px;
           background-color: #288b1b;
           font-size: 16px;
           cursor: pointer; }
+      /* line 147, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+      #commentsArea #form form .inResponseTo {
+        display: none; }
+  /* line 153, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+  #commentsArea #commentsNumber {
+    font-size: 20px; }
+  /* line 156, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
   #commentsArea #commentsList {
     padding: 0;
     width: 90%;
     max-width: 800px; }
+    /* line 160, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
     #commentsArea #commentsList li {
       list-style: none;
       text-align: left;
       position: relative; }
-      #commentsArea #commentsList li h5.author {
-        display: inline-block;
+      /* line 164, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+      #commentsArea #commentsList li > h5.author {
+        display: inline;
         text-align: left;
         padding: 0;
         margin: 0; }
-        #commentsArea #commentsList li h5.author a {
+        /* line 169, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+        #commentsArea #commentsList li > h5.author a {
           color: #363c7b;
           text-decoration: none; }
-      #commentsArea #commentsList li h5.date {
-        display: inline-block;
+      /* line 174, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+      #commentsArea #commentsList li > h5.date {
+        display: inline;
         text-align: left;
         font-weight: 300;
         padding: 0;
         margin: 0; }
-      #commentsArea #commentsList li p.content {
-        position: relative;
-        font-size: 14px;
-        white-space: pre-wrap;
-        display: block;
+      /* line 181, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+      #commentsArea #commentsList li > h5.authorAndDate {
+        top: 10px; }
+      /* line 184, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+      #commentsArea #commentsList li > .commentContent {
         border-radius: 3px;
-        border: 1px solid #666;
-        padding: 10px 10px;
-        text-align: left; }
-        #commentsArea #commentsList li p.content i.icon-up-open {
+        text-align: left;
+        padding-bottom: 30px; }
+        /* line 188, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+        #commentsArea #commentsList li > .commentContent > p.content {
+          position: relative;
+          font-size: 14px;
+          white-space: pre-wrap;
+          display: block;
+          padding: 15px 10px;
+          padding-bottom: 0px;
+          text-align: left;
+          margin: 0; }
+          /* line 197, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+          #commentsArea #commentsList li > .commentContent > p.content > i.icon-up-open {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #666;
+            cursor: pointer;
+            -webkit-transition-timing-function: ease-out;
+            -webkit-transition-duration: 150ms;
+            -moz-transition-timing-function: ease-out;
+            -moz-transition-duration: 150ms;
+            transition-timing-function: ease-out;
+            transition-duration: 150ms; }
+            /* line 209, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+            #commentsArea #commentsList li > .commentContent > p.content > i.icon-up-open:hover {
+              color: #000; }
+          /* line 213, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+          #commentsArea #commentsList li > .commentContent > p.content > i.icon-down-open {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #666;
+            cursor: pointer;
+            -webkit-transition-timing-function: ease-out;
+            -webkit-transition-duration: 150ms;
+            -moz-transition-timing-function: ease-out;
+            -moz-transition-duration: 150ms;
+            transition-timing-function: ease-out;
+            transition-duration: 150ms; }
+            /* line 225, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+            #commentsArea #commentsList li > .commentContent > p.content > i.icon-down-open:hover {
+              color: #000; }
+          /* line 229, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+          #commentsArea #commentsList li > .commentContent > p.content > i.downVotesNumber {
+            font-style: normal;
+            position: absolute;
+            top: 10px;
+            right: 65px; }
+          /* line 235, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+          #commentsArea #commentsList li > .commentContent > p.content > i.upVotesNumber {
+            font-style: normal;
+            position: absolute;
+            top: 10px;
+            right: 50px; }
+        /* line 242, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+        #commentsArea #commentsList li > .commentContent > .responses {
+          width: 93%;
+          margin-left: 5%;
+          right: 0px; }
+        /* line 247, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+        #commentsArea #commentsList li > .commentContent > .respondTo {
           position: absolute;
-          top: 10px;
+          bottom: 5px;
           right: 10px;
-          color: #666;
-          cursor: pointer;
-          -webkit-transition-timing-function: ease-out;
-          -webkit-transition-duration: 150ms;
-          -moz-transition-timing-function: ease-out;
-          -moz-transition-duration: 150ms;
-          transition-timing-function: ease-out;
-          transition-duration: 150ms; }
-          #commentsArea #commentsList li p.content i.icon-up-open:hover {
-            color: #000; }
-        #commentsArea #commentsList li p.content i.upVotesNumber {
-          font-style: normal;
-          position: absolute;
-          top: 10px;
-          right: 30px; }
+          font-size: 12px;
+          text-decoration: underline;
+          cursor: pointer; }
+    /* line 257, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+    #commentsArea #commentsList .commentContent {
+      box-shadow: 0px 0px 20px #e3e6ff inset;
+      border: 1px solid #27748f; }
+      /* line 260, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+      #commentsArea #commentsList .commentContent .commentContent {
+        box-shadow: 0px 0px 20px #aadeff inset; }
+        /* line 262, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+        #commentsArea #commentsList .commentContent .commentContent .commentContent {
+          box-shadow: 0px 0px 20px #a0d4fa inset; }
+          /* line 264, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+          #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent {
+            box-shadow: 0px 0px 20px #96caf5 inset; }
+            /* line 266, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+            #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent {
+              box-shadow: 0px 0px 20px #8cc0f0 inset; }
+              /* line 268, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+              #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent {
+                box-shadow: 0px 0px 20px #82b6eb inset; }
+                /* line 270, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+                #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent {
+                  box-shadow: 0px 0px 20px #78ace6 inset; }
+                  /* line 272, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+                  #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent {
+                    box-shadow: 0px 0px 20px #6ea2e1 inset; }
+                    /* line 274, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+                    #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent {
+                      box-shadow: 0px 0px 20px #6498dc inset; }
+                      /* line 276, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+                      #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent {
+                        box-shadow: 0px 0px 20px #5a8ed7 inset; }
+                        /* line 278, /Users/Charles/Development/rafdev/redditLike/public/css/post.scss */
+                        #commentsArea #commentsList .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent .commentContent {
+                          box-shadow: 0px 0px 20px #508fd2 inset; }
 
 /*# sourceMappingURL=post.css.map */

@@ -1,0 +1,36 @@
+.navContainer{
+	padding:5px 0px;
+	background: #444;
+	width:100%;
+	position:relative;
+	.nav{
+		margin:0px auto;
+		width:100%;
+		max-width: 1200px;
+		color:#FFF;
+		.col-lg-2{
+			text-align: center;
+		}
+		.btn-primary{
+			border:none;
+			background-color:rgba(0,0,0,0); 
+			box-shadow: -2px 2px 8px rgba(0,0,0,0.4) inset;
+			&:hover{
+				background-color:rgba(100,100,100,0.1); 
+			}
+		}
+		.userEmail {
+			box-shadow: none;
+			border:none;
+			background-color:rgba(0,0,0,0);
+		}
+		.userEmail{
+			background-color: rgba(0,0,0,0);
+		}
+		.title{
+			color:#FFF;
+			box-shadow: none;
+			font-size: 16px;
+		}
+	}
+}

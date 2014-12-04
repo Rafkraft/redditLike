@@ -20,22 +20,25 @@ exports = module.exports = function(req, res) {
         ],
         function(err, results){
             if(results[0]== null){
-                console.log('not found')
+                console.log('SUBREDDIT NULL');
+                req.flash('error', 'the subreddit "'+ req.params.sub +"\" doesn't exist");
+                view.render('index',index.sessionInfos(req,res));  
+            }else if(results[0].active==false){
+                console.log('SUBREDDIT UNACTIVATED');
+                req.flash('error', 'the subreddit "'+ req.params.sub +"\" is unactivated");
+                view.render('index',index.sessionInfos(req,res)); 
             }else{
-                console.log('found');
-
+                // recovering infos from search
                 var completeName = results[0].completeName;
                 var description =  results[0].description;
                 
                 mongoose.model('_'+req.params.sub).find(function(err,posts){
                     if(err)
                         console.log(err);
-                    console.log(posts);
-                    console.log('____________');
                     if(posts.length>0){
                         // There is at least 1 post in the collection
                         //
-                        console.log('there are posts');
+                        console.log('AT LEAST 1 POST IN THE COLLECTION');
                         infos = index.sessionInfos(req,res);
                         infos.completeName = completeName;
                         infos.description = description;
@@ -44,7 +47,7 @@ exports = module.exports = function(req, res) {
                     }else{
                         // There is not post in the collection
                         //
-                        console.log('there is no post yet');
+                        console.log('NO POST IN THE COLLECTION');
                         infos = index.sessionInfos(req,res);
                         infos.completeName = completeName;
                         infos.description = description;

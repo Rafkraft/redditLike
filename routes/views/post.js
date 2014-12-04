@@ -25,7 +25,8 @@ exports = module.exports = function(req, res) {
             if(results[0]== null){
                 console.log('not found')
             }else{
-                console.log('subreddit exists');
+                console.log('SUBREDDIT EXIST');
+                
                 var completeName = results[0].completeName;
                 var description = results[0].description;
 
@@ -35,14 +36,16 @@ exports = module.exports = function(req, res) {
                     if(post== null){
                         console.log('not found')
                     }else{
-                        console.log(post);
-                        console.log('____________');
+                        console.log('POST EXIST');
 
                         var infos = index.sessionInfos(req,res);
                         infos.completeName = completeName;
                         infos.subReddit = req.params.sub;
                         infos.postTitle = post.title;
                         infos.postUrlTitle = post.urlTitle;
+                        console.log('______');
+                        console.log(infos);
+                        console.log('______');
                         view.render('post',infos);
                     }
                 })
@@ -71,7 +74,7 @@ exports = module.exports = function(req, res) {
                         console.log(err);
                     if(post){
                         function isAlphaNumeric(s){
-                            var regexp = /^([a-zA-Z0-9 _\?\!\,.-ÇÉÈÊËÀÎÏÛ&çéèêëàîïû']+)$/gm;
+                            var regexp = /^([a-zA-Z0-9 _\?\!\,.-ÇÉÈÊËÀÎÏÛ&çéèêëâàîïûôÔ']+)$/gm;
                             return regexp.test(s);
                         }
 
@@ -92,6 +95,7 @@ exports = module.exports = function(req, res) {
                             infos.subReddit = req.params.sub;
                             infos.postTitle = post.title;
                             infos.postUrlTitle = post.urlTitle;
+                            infos.comment = req.body.text;
                             view.render('post',infos);
                         }else if(req.body.text.length<10 || req.body.text.length>500){
                             req.flash('error', 'Your comment must contain between 10 and 500 characters');
@@ -100,6 +104,7 @@ exports = module.exports = function(req, res) {
                             infos.subReddit = req.params.sub;
                             infos.postTitle = post.title;
                             infos.postUrlTitle = post.urlTitle;
+                            infos.comment = req.body.text;
                             view.render('post',infos);
                         }else{
                             var comment={};
@@ -107,18 +112,20 @@ exports = module.exports = function(req, res) {
                             comment.userName=res.locals.user.userName;
                             comment.userId=res.locals.user._id;
                             comment.content=req.body.text;
+                            comment.inResponseTo=req.body.inResponseTo;
                             comment.upVotesNumber=0;
+                            comment.downVotesNumber=0;
                             comment.upVotes=[];
                             comment.downVotes=[];
                             var id=0;
                             _.each(post.comments,function(value,index){
-                                console.log(value.id);
-                                console.log(typeof(value.id));
-                                if(id<=value.id){
-                                    id=value.id+1;
+                                console.log(value.commentId);
+                                console.log(typeof(value.commentId));
+                                if(id<=value.commentId){
+                                    id=value.commentId+1;
                                 }
                             })
-                            comment.id=id;
+                            comment.commentId=id;
 
                             post.comments.push(comment);
                             post.commentsNumber=post.comments.length;

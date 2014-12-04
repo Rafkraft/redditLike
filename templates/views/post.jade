@@ -10,10 +10,12 @@ block content
     script.                                              
         window.subReddit ="#{subReddit}";
         window.postUrlTitle ="#{postUrlTitle}";
+        window.comment="#{comment}";
 
     div#nav
         ul
-            li.newpost
+            li.return
+                i.icon-left-dir
                 a(href="./") /r/#{subReddit}
 
     div#main
@@ -21,9 +23,11 @@ block content
             if typeof info !== "undefined"
                 .info
                     h5 #{info}
+                        a(class="close" onclick="$('.info').hide()") × 
             if typeof error !== "undefined"
                 .error
                     h5 #{error}
+                        a(class="close" onclick="$('.error').hide()") × 
         div#post
         div#commentsArea
             div#form
@@ -35,12 +39,16 @@ block content
                         div.form-group
                             label(for='Text') Comment
                             textarea(type='string', name='text', id="text").form-control
+                        div.form-group.inResponseTo
+                            label(for='inResponseTo' style='display: inline-block') In response to
+                            input(name='inResponseTo' id="inResponseTo")
                         div.form-group
-                            button.button(type='submit').btn.btn-primary Send
+                            button.button(type='submit' class="btn btn-primary") Send
                 else
                     div.notConnected 
                         i.icon-block
                         span you must be connected to comment
+            div#commentsNumber
             div#comments
 
 
@@ -48,14 +56,19 @@ block content
         h2 <%=title%>
         h5.date <%=date%>
         p.content <%=content%>
-        h5.commentsNumber <%=commentsNumber%>
 
     script(type="text/template" id="commentTemplate")
-        h5.author <%=author%>
-        h5.date <%=date%>
-        p.content <%=content%>
-            i.upVotesNumber <%=upVotesNumber%>
-            i.icon-up-open
+        h5.authorAndDate <%=authorAndDate%>
+        .commentContent
+            p.content <%=content%>
+                i.upVotesNumber <%=upVotesNumber%>
+                i.downVotesNumber <%=downVotesNumber%>
+                <%=iconUpOpen%>
+                <%=iconDownOpen%>
+            .responses
+            <%=responTo%>
+
+            
 
 
 

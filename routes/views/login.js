@@ -9,9 +9,10 @@ exports = module.exports = function(req, res) {
     
     if (req.method === 'GET') {
         if (typeof res.locals.user=="undefined"){
+            console.log('not connected');
             view.render('login',index.sessionInfos(req,res));
         }else{
-            view.render('/',index.sessionInfos(req,res));
+            view.render('login',index.sessionInfos(req,res));
         }
     }else if (req.method === 'POST') {
 
@@ -33,7 +34,6 @@ exports = module.exports = function(req, res) {
                     keystone.get('signin redirect')(user, req, res);
                 } else {
                     console.log('super')
-                    console.log(req);
                     if(req.body.next){
                         res.redirect(req.body.next);
                     }else{

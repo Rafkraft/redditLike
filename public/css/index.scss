@@ -1,0 +1,52 @@
+$main-blue: #5f69d8;
+$clear-blue:#95c2f4;
+$clear-blueHover:#6981e1;
+
+
+.nav-tabs {
+	li{
+		cursor: pointer;
+	}
+}
+#main{
+	#subRedditsList{
+		padding:0;
+		li{
+			list-style: none;
+			height:130px;
+			width:31%;
+			@media screen and (max-width: 1000px) {
+			    width:48%;
+  			}
+ 			@media screen and (max-width: 550px) {
+			    width:95%;
+  			}
+			margin:5px;
+			display: inline-block;
+			vertical-align: top;
+			overflow: hidden;
+			cursor: pointer;
+			&>div{
+				background-color: $clear-blue;
+				border-radius: 3px;
+				height:100%;
+				padding:5px;
+				overflow: hidden;
+				p.description{
+					font-size: 13px;
+				}
+			}
+			&:hover{
+				overflow: auto;
+				box-shadow: 0px 0px 16px rgba(0,0,0,0.3);
+				&>div{
+					overflow: auto;
+					background-color: $clear-blueHover;
+					h4{
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}

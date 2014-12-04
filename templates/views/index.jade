@@ -1,4 +1,49 @@
 extends ../layouts/base
  
 block content
-    a.button(href="newpost") New Post
+    div.message
+        if typeof info !== "undefined"
+            .info
+                h5 #{info}
+                    a(class="close" onclick="$('.info').hide()") × 
+        if typeof error !== "undefined"
+            .error
+                h5 #{error}
+                    a(class="close" onclick="$('.error').hide()") × 
+                    
+    script(type='text/javascript' src="/js/index.js")
+    link(href="/css/index.css", rel="stylesheet")
+    link(href="/css/subRedditsList.css", rel="stylesheet")
+
+    div#indexNav
+        ul.nav.nav-tabs
+            li.subReddits.active
+                a.subRedditsLink  Subreddits
+            li.recents
+                a.recentsLink Recents
+            li.populars
+                a.popularsLink Populars
+    div#main
+
+
+    script(type="text/template" id="subTemplate")
+        div
+            h4 <%=completeName%>
+            h5 /r/<%=name%>
+            p.description<%=description%>
+
+    script(type="text/template" id="itemTemplate")
+        div.left
+            div
+                div.up
+                    span.arrow.icon-up-open
+                div.votesDifference
+                    span
+                        <%=votesDifference%>
+                div.down
+                    span.arrow.icon-down-open
+        div.right
+            h4 <%=title%>
+            h5.comments <%=comments%>
+            h5.date <%=date%>
+            span <%=icon%>

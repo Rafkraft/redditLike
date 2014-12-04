@@ -1,3 +1,4 @@
+
 var keystone = require('keystone');
 
 keystone.init({
@@ -19,8 +20,17 @@ keystone.init({
     'cookie secret': 'hdezhyyCGYFTSY57shbhshuç!qçqi!u9NHSèqvsvqè(fè0SHHSBQGSQ9Y897SGYygxqt(§gébui"gs(§èD('
 });
  
+//  MONGOOSE INITIALIZATION
 require('./models');
+
+//  CRON JOBS
+require('./cron/rank.js');
+require('./cron/recents.js');
+require('./cron/populars.js');
+require('./cron/subredditsInfos.js');
 
 keystone.set('routes', require('./routes'));
  
+
 keystone.start();
+

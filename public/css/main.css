@@ -1,18 +1,25 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+/* line 14, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
 body {
   background-color: #FFF;
   width: 100%;
   height: 100%;
   position: relative;
   font-family: 'Open Sans', sans-serif; }
-  body > div {
+  /* line 20, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+  body .container {
+    width: 100%;
     max-width: 1200px;
-    width: 90%;
-    text-align: center;
     margin-right: auto;
     margin-left: auto;
-    border: 1px solid #000; }
+    padding-bottom: 100px; }
+  /* line 27, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+  body > div {
+    border: 0px solid #000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    height: 100%; }
 
+/* line 34, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
 .button {
   padding: 8px;
   font-size: 0.8em;
@@ -24,22 +31,82 @@ body {
   color: #FFF;
   border-radius: 4px; }
 
+/* line 45, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
 .message {
   text-align: left;
   display: block;
   margin-bottom: 5px; }
-  .message h5 {
-    display: inline-block;
-    font-weight: 300;
-    margin: 0;
-    padding: 7px;
-    border-radius: 3px;
-    font-size: 13px; }
+  /* line 49, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+  .message > div {
+    display: block;
+    margin: 15px 0px; }
+    /* line 52, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+    .message > div h5 {
+      position: relative;
+      display: inline;
+      padding: 9px 11px;
+      padding-right: 25px;
+      margin: 6px 0px;
+      font-weight: 300;
+      font-size: 13px;
+      border-radius: 2px; }
+  /* line 64, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
   .message .error h5 {
     background-color: #C45;
     color: #FFF; }
+  /* line 70, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
   .message .info h5 {
     background-color: #40c13b;
     color: #FFF; }
+
+/* line 76, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+.close {
+  float: none;
+  position: absolute;
+  right: 6px;
+  float: none; }
+
+/* line 82, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+#nav {
+  display: inline; }
+  /* line 84, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+  #nav ul {
+    display: block;
+    text-align: left; }
+    /* line 87, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+    #nav ul li {
+      display: inline-block;
+      border-radius: 3px;
+      padding: 5px; }
+      /* line 91, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+      #nav ul li a {
+        padding: 10px 9px;
+        text-decoration: none;
+        font-weight: 300; }
+    /* line 98, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+    #nav ul li.newpost {
+      background-color: #5f69d8; }
+      /* line 100, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+      #nav ul li.newpost a {
+        color: #FFF; }
+    /* line 104, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+    #nav ul li.goHome {
+      background-color: #222; }
+      /* line 106, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+      #nav ul li.goHome i {
+        color: #FFF;
+        font-size: 14px; }
+      /* line 110, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+      #nav ul li.goHome a {
+        color: #FFF; }
+    /* line 114, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+    #nav ul li.return {
+      background-color: #222; }
+      /* line 116, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+      #nav ul li.return i {
+        color: #FFF; }
+      /* line 119, /Users/Charles/Development/rafdev/redditLike/public/css/main.scss */
+      #nav ul li.return a {
+        color: #FFF; }
 
 /*# sourceMappingURL=main.css.map */

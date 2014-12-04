@@ -31,37 +31,43 @@ keystone.set('500', function(err, req, res, next) {
 });
 
 
-
 // Load Routes
 var routes = {
     views: importRoutes('./views'),
-    feed: importRoutes('./feed')
+    feed: importRoutes('./feed'),
+    captcha: importRoutes('./captcha')
 };
 
 exports.sessionInfos = function(req,res){
     var canReturn= false;
 
+    //  Session infos
+    var connected,userEmail,userName,isAdmin;
     if (typeof res.locals.user=="undefined"){
         connected= false;
         userEmail= null;
         userName=null;
-    }
-    else {
+        isAdmin = false;
+    }else {
         connected= true;
         userEmail= res.locals.user.email;
         userName=res.locals.user.userName;
+        isAdmin = res.locals.user.isAdmin;
     }
+
+    //  + errors / infos
     var toReturn = {
         error:req.flash('error')[0] ,
         info:req.flash('info')[0] ,
-        connected:connected,
-        userEmail:userEmail,
-        userName:userName
+        "connected":connected,
+        "userEmail":userEmail,
+        "userName":userName,
+        "isAdmin":isAdmin,
     };
 
+    //  If in subreddit, make sure subreddit exist;
     if(req.params.sub){
-        toReturn.subReddit = req.params.sub
-    
+        toReturn.subReddit = req.params.sub;
         async.series([
             function(callback){
                 mongoose.model('subredditsList').findOne({ "name":req.params.sub},function(err,subs){
@@ -81,19 +87,20 @@ exports.sessionInfos = function(req,res){
             }
         });
     }else{
+        console.log('else');
         canReturn=true;
     }
-    while(!canReturn){
-        return toReturn;
-    }    
+
+    return toReturn;
 }
 
 
 // Bind Routes
 exports = module.exports = function(app) {
     //Feeds
-    app.get('/feed/:sub',routes.feed.subreddit);
-    app.get('/feed/:sub/:post',routes.feed.post);
+    app.get('/feed/:query',routes.feed.subreddit);
+
+    app.get('/captcha.png',routes.captcha.captcha);
 
     app.get('/', routes.views.index);
     app.get('/login', routes.views.login);

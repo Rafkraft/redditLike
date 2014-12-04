@@ -31,6 +31,12 @@
       "src": "fontawesome"
     },
     {
+      "uid": "9dc654095085167524602c9acc0c5570",
+      "css": "left-dir",
+      "code": 59403,
+      "src": "fontawesome"
+    },
+    {
       "uid": "ccddff8e8670dcd130e3cb55fdfc2fd0",
       "css": "down-open",
       "code": 59392,
@@ -71,6 +77,12 @@
       "css": "facebook",
       "code": 59396,
       "src": "entypo"
+    },
+    {
+      "uid": "w3nzesrlbezu6f30q7ytyq919p6gdlb6",
+      "css": "home",
+      "code": 59404,
+      "src": "typicons"
     }
   ]
 }

@@ -14,9 +14,12 @@ $padding-left:40px;
 #main {
     padding-left:$padding-left;
 }
+h2{
+    padding-left: $padding-left;
+}
 .rules {
-    background-color: $clear-blue;
-    border: 1px solid $main-blue;
+    background-color: #8cb7ee;
+    border: 1px solid #6a8cb7;
     border-radius: 3px;
     text-align: left;
     width: 90%;
@@ -24,26 +27,50 @@ $padding-left:40px;
     margin-left: $padding-left;
     padding:10px;
 }
+#nav {
+    display: inline;
+    ul {
+        display: block;
+        text-align: left;
+        padding-left:$padding-left;
+        li {
+            display: inline-block;
+            border-radius: 3px;
+            padding:5px;
+            background-color: #222;
+            i{
+                color:#FFF;
+            }
+            a{
+                color:#FFF;
+                padding:10px 9px;
+                text-decoration: none;
+                font-weight: 300;
+            }   
+        }
+    }
+}
 #formTypes {
     padding-left:$padding-left;
     display: block;
     text-align: left;
     li {
-        background-color: #555;
+        background-color: #5f69d8;
         display: inline-block;
-        border-radius: 3px;
+        border-radius: 2px;
         padding:5px;
         cursor: pointer;
         a{
             cursor: pointer;
-            color:#FFF;
+            color:#000;
             padding:10px 9px;
             text-decoration: none;
             font-weight: 300;
         }
     }
     li.active {
-        background-color: #DDD;
+        background-color: #FFF;
+        box-shadow: 0px 0px 14px #5f69d8 inset;
         cursor: default;
         a {
             color:#111;

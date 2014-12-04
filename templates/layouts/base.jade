@@ -9,7 +9,9 @@ html
         title= title || 'My Keystone Website'
         link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
         link(href="/styles/site.min.css", rel="stylesheet")
+        link(href="/css/libs/bootstrap.min.css", rel="stylesheet")
         link(href="/css/main.css", rel="stylesheet")
+        link(href="/css/nav.css", rel="stylesheet")
         link(href="/css/infos.css", rel="stylesheet")
         link(href="/css/fontello/css/fontello.css", rel="stylesheet")
 
@@ -22,32 +24,37 @@ html
         block css
         block head
 
-        script.
-            window.userInfos=[];                                          
-            window.userInfos.connected ="#{connected}";
-            window.userInfos.userEmail ="#{userEmail}";
-            window.userInfos.userName ="#{userName}";
-    body
-        
-        #all
-            div#infosPlaceholder
-                if connected==true
-                    h5 #{userEmail}
-                    a(href="keystone/signout", class="logout") Log out
-                    a(href="account", class="login") Account
+        script(type='text/javascript').
+            window.userInfos={};   
+            window.userInfos.connected="#{connected}";
+            window.userInfos.userEmail="#{userEmail}";
+            window.userInfos.userName="#{userName}";
+            window.userInfos.isAdmin="#{isAdmin}";
 
-                else
-                    a(href="login", class="login") Log in
-                    a(href="register", class="register") sign up
-            #header My Keystone Website
-            #content
-                
+    body
+        div.navContainer
+            div.nav
+                div.col-lg-2
+                    a(href="/" class="title btn btn-primary") My Keystone Website
+                div.col-lg-4.pull-right
+                    if connected == true
+                        .col-lg-3.pull-right    
+                            a(href="/keystone/signout", class="logout btn btn-primary") Log out
+                        .col-lg-3.pull-right    
+                            a(href="/account", class="login btn btn-primary") Account
+                        .col-lg-6.pull-right
+                            span(class="userEmail btn btn-primary") #{userEmail}
+                    else
+                        .col-lg-3.pull-right    
+                            a(href="/login", class="login btn btn-primary") Log in
+                        .col-lg-3.pull-right    
+                            a(href="/register", class="register btn btn-primary") Sign up  
+        div.container
+            #content 
                 block intro
-                
                 +flash-messages(messages)
-                
                 block content
-            
-            #footer 
+            div.footer 
+                block footer 
             
     block js

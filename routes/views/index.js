@@ -5,8 +5,6 @@ var index = require('.././index.js');
 
 exports = module.exports = function(req, res) {
     console.log('INDEX RENDERED');
-
     var view = new keystone.View(req, res);
-
-    view.render('/',index.sessionInfos(req,res));
+    view.render('index',index.sessionInfos(req,res));
 }

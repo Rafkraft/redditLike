@@ -1,7 +1,24 @@
 var keystone = require('keystone'),
     Types = keystone.Field.Types;
 var mongoose = require('mongoose');
- 
+
+
+var Schema = mongoose.Schema;
+
+// ===============
+// POST (recap in the user object) schema
+// ===============
+
+var Post = mongoose.Schema;
+
+var postSchema = new Post({
+    createdOn:Date,
+    id:Number,
+    subReddit:String,
+    postId:Schema.ObjectId
+});
+
+
 var User = new keystone.List('User');
 
 User.add({
@@ -21,10 +38,9 @@ User.schema.add({
     description: String,
     upVotes: Number,
     downVotes: Number,
-    posts: Array,
+    posts: [postSchema]
 });
 
-//User.schema.add({ adminSubreddits: mongoose.Schema.Types.Array });
 
 User.register();
 

@@ -4,16 +4,31 @@ block content
     link(href="/css/newPost.css", rel="stylesheet")
     script(type='text/javascript' src="/js/newpost.js")
 
+    script(type='text/javascript').
+        window.savedInfos={};   
+        window.savedInfos.savedTitle="#{savedTitle}";
+        window.savedInfos.savedLink="#{savedLink}";
+        window.savedInfos.savedText="#{savedText}";
+
+
+
+
     h2 #{subReddit} - New Post
 
     div.message
         if typeof info !== "undefined"
             .info
                 h5 #{info}
+                    a(class="close" onclick="$('.info').hide()") × 
         if typeof error !== "undefined"
             .error
                 h5 #{error}
-
+                    a(class="close" onclick="$('.error').hide()") × 
+    div#nav
+        ul
+            li.newpost
+                i.icon-left-dir
+                a(href="./") /r/#{subReddit}
     ul#formTypes
         li 
             a.link Link

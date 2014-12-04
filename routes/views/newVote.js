@@ -9,51 +9,61 @@ var _ = require('underscore');
 
 exports = module.exports = function(req, res) {
     var view = new keystone.View(req, res);
-    console.log('NEWVOTE');
-    console.log(req.params.sub);
-    console.log(req.body);
-
     
     if (req.method === 'POST') {
         // User logged in
         if (typeof res.locals.user=="undefined"){
-            console.log('not logged in');
+            view.res.send('you are not connected');
+        // right postType
+        }else if(req.body.postType!=="postVote"&&req.body.postType!=="commentVote"){
+            view.res.send('There was an error during the process');
+        // right voteType
+        }else if(req.body.vote!=="up"&&req.body.vote!=="down"){
+            view.res.send('There was an error during the process');
         }else{
-            if (req.body.postType=="postVote") {
-                console.log('postVote');
-                switch (req.body.vote){
-                    case "up":
-                        console.log('up');
-                        votePost(
-                            req.params.sub,
-                            "up",
-                            req.body.postId,
-                            res.locals.user._id
-                        )
-                        break;
-                    case "down":
-                        console.log('down');
-                        votePost(
-                            req.params.sub,
-                            "down",
-                            req.body.postId,
-                            res.locals.user._id
-                        )
-                        break
-                }
-            }else if(req.body.postType=="commentVote"){
-                console.log('comment Vote');
-                switch (req.body.vote){
-                    case "up":
-                        voteComment(
-                            req.params.sub,
-                            req.body.urlTitle,
-                            req.body.commentId,
-                            res.locals.user._id,
-                            "up"
-                        )
-                        break;
-                }
+            switch(req.body.postType){
+                case "postVote":
+                    switch (req.body.vote){
+                        case "up":
+                            votePost(
+                                req.params.sub,
+                                "up",
+                                req.body.postId,
+                                res.locals.user._id
+                            );
+                            break;
+                        case "down":
+                            votePost(
+                                req.params.sub,
+                                "down",
+                                req.body.postId,
+                                res.locals.user._id
+                            );
+                            break;
+                    }
+                    break;
+                case "commentVote":
+                    switch (req.body.vote){
+                        case "up":
+                            voteComment(
+                                req.params.sub,
+                                req.body.urlTitle,
+                                req.body.commentId,
+                                res.locals.user._id,
+                                "up"
+                            );
+                            break;
+                        case "down":
+                            voteComment(
+                                req.params.sub,
+                                req.body.urlTitle,
+                                req.body.commentId,
+                                res.locals.user._id,
+                                "down"
+                            );
+                            break;
+                    }
+                    break;
             }
         }
         function voteComment (subName,urlTitle,commentId,userId,vote){
@@ -65,54 +75,56 @@ exports = module.exports = function(req, res) {
                 }
             ],
             function(err, results){
-                // If subreddit not found
-                if(results[0]== null){
-                    console.log('not found')
-                    req.flash('error', "there was an error during the process");
-                    view.render('post',index.sessionInfos(req,res));
-
-                // Subreddit found
+                if(err){
+                    console.log(err);
+                    view.res.send('There was an error during the process');
+                }else if(results[0]== null){
+                    view.res.send('There was an error during the process');
                 }else{
-                    console.log('error soon')
-                    console.log(subName);
-                    console.log(urlTitle);
                     mongoose.model('_'+subName).findOne({ "urlTitle":urlTitle},function(err,result){
-                        if (err)
-                            console.log(err)
+                        if (err){
+                            console.log(err);
+                            view.res.send('There was an error during the process');
+                        }else if(result==null){
+                            view.res.send('There was an error during the process');
+                        }else{
+                            // Check if userId already is in upVotes/downVotes lists
+                            var rowId;
+                            _.each(result.comments, function(value,index){
+                                if(value.commentId==commentId){
+                                    rowId=index;
+                                }
+                            });
 
-                        // Check if userId already is in upVotes/downVotes lists
-                        var rowId;
-                        _.each(result.comments, function(value,index){
-                            if(value.id==commentId){
-                                rowId=index;
+                            var upFound = _.where(result.comments[rowId].upVotes, userId);
+                            var downFound = _.where(result.comments[rowId].downVotes, userId);
+
+                            switch(vote) {
+                                case "up":
+                                    if(!upFound[0]){
+                                        result.comments[rowId].upVotes.push(userId);   
+                                    }
+                                    if(downFound[0]){
+                                        result.comments[rowId].downVotes.splice( result.comments[rowId].downVotes.indexOf(userId), 1 );
+                                    }
+                                    break;
+                                case "down":
+                                    if(!downFound[0]){
+                                        result.comments[rowId].downVotes.push(userId);
+                                    }
+                                    if(upFound[0]){
+                                        result.comments[rowId].upVotes.splice( result.comments[rowId].upVotes.indexOf(userId), 1 );
+                                    }
+                                    break;
                             }
-                        });
-
-                        var upFound = _.where(result.comments[rowId].upVotes, userId);
-                        var downFound = _.where(result.comments[rowId].downVotes, userId);
-                        console.log(result.comments[rowId]);
-                        console.log(userId);
-
-                        switch(vote) {
-                            case "up":
-                                console.log('up')
-                                if(!upFound[0]){
-                                    console.log('UP: up not found')
-                                    result.comments[rowId].upVotes.push(userId);
-                                    result.comments[rowId].upVotesNumber =result.comments[rowId].upVotes.length
-                                }
-                                if(downFound[0]){
-                                    console.log('UP: down found')
-                                    result.comments[rowId].downVotes.splice( result.comments[rowId].downVotes.indexOf(userId), 1 );
-                                }
-                                break;
+                            result.comments[rowId].upVotesNumber =result.comments[rowId].upVotes.length;
+                            result.comments[rowId].downVotesNumber =result.comments[rowId].downVotes.length;
+                            view.res.send('{"up":"'+result.comments[rowId].upVotesNumber+'","down":"'+result.comments[rowId].downVotesNumber+'"}');
+                            result.save(function(err,result){
+                                if(err)
+                                    console.log(err);
+                            });
                         }
-
-                        result.save(function(err,result){
-                            if(err)
-                                console.log(err);
-                            //console.log(result);
-                        });
                     });
                     
                 }
@@ -132,56 +144,49 @@ exports = module.exports = function(req, res) {
             function(err, results){
                 // If subreddit not found
                 if(results[0]== null){
-                    console.log('not found')
-                    req.flash('error', "there was an error during the process");
-                    view.render('subReddit',index.sessionInfos(req,res));
-
-                // SUbreddit found
-                }else{
-                    console.log('found');
-                    if(results[0].active==false){
-                        req.flash('error', 'the subreddit is unactivated');
-                        view.render('subReddit',index.sessionInfos(req,res));                       
-                    }else {
-
-                        mongoose.model('_'+subName).findOne({ "_id":postId},function(err,result){
-                            if (err)
-                                console.log(err)
-
-                            // Check if userId already is in upVotes/downVotes lists
+                    view.res.send('There was an error during the process');
+                }else if(results[0].active==false){
+                    view.res.send('There was an error during the process');
+                }else {
+                    mongoose.model('_'+subName).findOne({ "_id":postId},function(err,result){
+                        if (err){
+                            console.log(err);
+                            view.res.send('There was an error during the process');
+                        }else if(result==null){
+                            view.res.send('There was an error during the process');
+                        }else{ 
+                            //Check if userId already is in upVotes/downVotes, push/splice userId
                             var upFound = _.where(result.upVotes, userId);
                             var downFound = _.where(result.downVotes, userId);
 
                             switch(vote) {
                                 case "up":
-                                    console.log('up')
                                     if(!upFound[0]){
-                                        console.log('UP: up not found')
                                         result.upVotes.push(userId);
                                     }
                                     if(downFound[0]){
-                                        console.log('UP: down found')
                                         result.downVotes.splice( result.downVotes.indexOf(userId), 1 );
                                     }
                                     break;
                                 case "down":
-                                    console.log('down')
                                     if(!downFound[0]){
-                                        console.log('DOWN: down not  found')
                                         result.downVotes.push(userId);
                                     }
                                     if(upFound[0]){
-                                        console.log('DOWN: up found')
-                                        result.upVotes.splice( result.downVotes.indexOf(userId), 1 );                                        
+                                        result.upVotes.splice( result.upVotes.indexOf(userId), 1 );                                        
                                     }
                                     break;
                             }
                             result.votesDifference=result.upVotes.length-result.downVotes.length;
-                            result.save();
-                        });
-                    }
+                            view.res.send('{"votesDifference":"'+result.votesDifference+'"}')
+                            result.save(function(err,result){
+                                if(err)
+                                    console.log(err);
+                            });
+                        }
+                    });
                 }
             });
         }
     }
-}
+};
